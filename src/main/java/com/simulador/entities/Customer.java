@@ -197,7 +197,7 @@ public class Customer extends Component {
         int row = tableNumber / 5;
         int col = tableNumber % 5;
         return new Point2D(
-                200 + col * (RestaurantController.SPRITE_SIZE * 2),
+                100 + col * (RestaurantController.SPRITE_SIZE * 2),
                 100 + row * (RestaurantController.SPRITE_SIZE * 2)
         );
     }

@@ -13,7 +13,7 @@ import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 public class RestaurantController implements EntityFactory {
     public static final int WINDOW_WIDTH = 700;
     public static final int WINDOW_HEIGHT = 500;
-    public static final int TOTAL_TABLES = 30;
+    public static final int TOTAL_TABLES = 20;
 
     public static final double ENTRANCE_X = 50;
     public static final double ENTRANCE_Y = 500;

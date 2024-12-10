@@ -164,8 +164,8 @@ public class Main extends GameApplication {
         for (int i = 0; i < RestaurantController.TOTAL_TABLES; i++) {
             int row = i / 5;
             int col = i % 5;
-            double x = 200 + col * (RestaurantController.SPRITE_SIZE * 2);
-            double y = 3 + row * (RestaurantController.SPRITE_SIZE * 2);
+            double x = 100 + col * (RestaurantController.SPRITE_SIZE * 2);
+            double y = 100 + row * (RestaurantController.SPRITE_SIZE * 2);
 
             SpawnData data = new SpawnData(x, y);
             data.put("tableNumber", i);

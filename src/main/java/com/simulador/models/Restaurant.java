@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Condition;
 
 public class Restaurant {
-    public static final int TOTAL_TABLES = 10;
+    public static final int TOTAL_TABLES = 20;
     private final boolean[] tables;
     private final ReentrantLock lock;
     private final Condition tableAvailable;

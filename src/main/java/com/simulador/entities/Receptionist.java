@@ -8,8 +8,6 @@ import javafx.geometry.Point2D;
 
 import java.util.Queue;
 import java.util.LinkedList;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.concurrent.locks.Condition;
 import java.util.logging.Logger;
 
 public class Receptionist extends Component implements Observer {
@@ -17,8 +15,7 @@ public class Receptionist extends Component implements Observer {
     private final Point2D position;
     private final Restaurant restaurantMonitor;
     private final Queue<Customer> waitingCustomers;
-    private final ReentrantLock lock;
-    private final Condition customerWaiting;
+    private final Object lock; // Objeto para sincronización
     private volatile boolean isBusy; // volatile para acceso concurrente
     private Customer currentCustomer;
     private final CustomersStats customerStats;
@@ -28,8 +25,7 @@ public class Receptionist extends Component implements Observer {
         this.position = position;
         this.customerStats = customerStats;
         this.waitingCustomers = new LinkedList<>();
-        this.lock = new ReentrantLock();
-        this.customerWaiting = lock.newCondition();
+        this.lock = new Object();
         this.isBusy = false;
 
         // Se registra como observador del monitor
@@ -58,20 +54,16 @@ public class Receptionist extends Component implements Observer {
     }
 
     public void addCustomerToQueue(Customer customer) {
-        lock.lock();
-        try {
+        synchronized (lock) {
             waitingCustomers.add(customer);
-            customerWaiting.signal(); // Notifica a un recepcionista en espera
-        } finally {
-            lock.unlock();
+            lock.notify(); // Notifica a un recepcionista en espera
         }
     }
 
     private Customer getNextCustomer() throws InterruptedException {
-        lock.lock();
-        try {
-            while (waitingCustomers.isEmpty() && !Thread.currentThread().isInterrupted()) { // Manejo de interrupción en la espera
-                customerWaiting.await();
+        synchronized (lock) {
+            while (waitingCustomers.isEmpty() && !Thread.currentThread().isInterrupted()) {
+                lock.wait();
             }
             // Verifica si se interrumpió después de despertar
             if (Thread.currentThread().isInterrupted()) {
@@ -81,11 +73,8 @@ public class Receptionist extends Component implements Observer {
             currentCustomer = waitingCustomers.poll();
             isBusy = true;
             return currentCustomer;
-        } finally {
-            lock.unlock();
         }
     }
-
 
     private void handleCustomer(Customer customer) {
         try {
@@ -106,13 +95,9 @@ public class Receptionist extends Component implements Observer {
             Thread.currentThread().interrupt();
             logger.warning("Recepcionista interrumpido atendiendo a un cliente.");
         } finally {
-            // Asegurar que isBusy se actualiza incluso con interrupciones
-            lock.lock();
-            try {
+            synchronized (lock) {
                 currentCustomer = null;
                 isBusy = false;
-            } finally {
-                lock.unlock();
             }
         }
     }
@@ -120,25 +105,18 @@ public class Receptionist extends Component implements Observer {
     @Override
     public void onTableAvailable() {
         logger.info("Recepcionista: Una mesa está disponible.");
-        lock.lock();
-        try {
-            customerWaiting.signal(); // Notifica a un recepcionista en espera
-        } finally {
-            lock.unlock();
+        synchronized (lock) {
+            lock.notify(); // Notifica a un recepcionista en espera
         }
     }
 
-
     public boolean isBusy() {
-        return isBusy; //  No necesita bloqueo si isBusy es volatile
+        return isBusy; // No necesita bloqueo si isBusy es volatile
     }
 
     public Customer getCurrentCustomer() {
-        lock.lock();
-        try {
+        synchronized (lock) {
             return currentCustomer;
-        } finally {
-            lock.unlock();
         }
     }
 
@@ -149,5 +127,5 @@ public class Receptionist extends Component implements Observer {
     @Override
     public void onUpdate(double tpf) {
         // Método vacío en la interfaz, no se usa
-        }
+    }
 }

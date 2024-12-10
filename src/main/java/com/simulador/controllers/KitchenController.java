@@ -9,8 +9,8 @@ import javafx.scene.image.ImageView;
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 
 public class KitchenController implements EntityFactory {
-    public static final double KITCHEN_X = 10;
-    public static final double KITCHEN_Y = 200;
+    public static final double KITCHEN_X = 450;
+    public static final double KITCHEN_Y = 30;
 
     @Spawns("kitchen")
     public Entity spawnKitchen(SpawnData data) {
