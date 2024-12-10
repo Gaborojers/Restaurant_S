@@ -10,14 +10,14 @@ import javafx.scene.image.ImageView;
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 
 public class ReceptionistController implements EntityFactory {
-    public static final double RECEPTIONIST_X = 500;
-    public static final double RECEPTIONIST_Y = 296;
+    public static final double RECEPTIONIST_X = 450;
+    public static final double RECEPTIONIST_Y = 350;
 
     @Spawns("receptionist")
     public Entity spawnReceptionist(SpawnData data) {
         ImageView imageView = new ImageView(new Image("img/recepcion/Recepcionista.png"));
-        imageView.setFitWidth(RestaurantController.SPRITE_SIZE * 5);
-        imageView.setFitHeight(RestaurantController.SPRITE_SIZE * 5);
+        imageView.setFitWidth(RestaurantController.SPRITE_SIZE * 3);
+        imageView.setFitHeight(RestaurantController.SPRITE_SIZE * 3);
 
         return entityBuilder()
                 .at(ReceptionistController.RECEPTIONIST_X, ReceptionistController.RECEPTIONIST_Y)

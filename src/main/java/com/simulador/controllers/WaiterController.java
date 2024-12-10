@@ -11,8 +11,8 @@ import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 
 public class WaiterController implements EntityFactory {
     public static int TOTAL_WAITERS = 2;
-    public static double WAITER_X = 400;
-    public static double WAITER_Y = 300;
+    public static double WAITER_X = 360;
+    public static double WAITER_Y = 100;
     public static double WAITER_SPEED = 180.0;
 
     @Spawns("waiter")

@@ -23,8 +23,8 @@ public class ChefController implements EntityFactory {
         Random rand = new Random();
         int randomIndex = rand.nextInt(imagePaths.size());
         ImageView imageView = new ImageView(new Image(imagePaths.get(randomIndex)));
-        imageView.setFitWidth(RestaurantController.SPRITE_SIZE * 5);
-        imageView.setFitHeight(RestaurantController.SPRITE_SIZE * 5);
+        imageView.setFitWidth(RestaurantController.SPRITE_SIZE * 3);
+        imageView.setFitHeight(RestaurantController.SPRITE_SIZE * 3);
 
         return entityBuilder()
                 .at(data.getX(), data.getY())

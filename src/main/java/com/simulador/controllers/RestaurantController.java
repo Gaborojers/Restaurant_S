@@ -15,8 +15,8 @@ public class RestaurantController implements EntityFactory {
     public static final int WINDOW_HEIGHT = 500;
     public static final int TOTAL_TABLES = 20;
 
-    public static final double ENTRANCE_X = 50;
-    public static final double ENTRANCE_Y = 500;
+    public static final double ENTRANCE_X = 100;
+    public static final double ENTRANCE_Y = 600;
 
     // Tiempos (en milisegundos)
     public static final int MIN_EATING_TIME = 5000;
