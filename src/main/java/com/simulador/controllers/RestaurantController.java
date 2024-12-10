@@ -13,16 +13,14 @@ import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 public class RestaurantController implements EntityFactory {
     public static final int WINDOW_WIDTH = 700;
     public static final int WINDOW_HEIGHT = 500;
-    public static final int TOTAL_TABLES = 30;
+    public static final int TOTAL_TABLES = 25;
 
     public static final double ENTRANCE_X = 50;
     public static final double ENTRANCE_Y = 500;
 
-    // Tiempos (en milisegundos)
     public static final int MIN_EATING_TIME = 5000;
     public static final int MAX_EATING_TIME = 10000;
 
-    // Dimensiones de los sprites
     public static final int SPRITE_SIZE = 30;
 
     @Spawns("table")

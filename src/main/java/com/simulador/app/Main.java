@@ -115,7 +115,7 @@ public class Main extends GameApplication {
         restaurantMonitor = new Restaurant();
         orderQueueMonitor = new MonitorOrder();
         customerQueueMonitor = new MonitorCustomer();
-        poissonDistribution = new PoissonDistribution(0.2); // Ajusta este valor para cambiar la frecuencia de llegada
+        poissonDistribution = new PoissonDistribution(0.5); // Ajusta este valor para cambiar la frecuencia de llegada
     }
 
     private void initializeUI() {
