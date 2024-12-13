@@ -31,8 +31,7 @@ public class MonitorCustomer {
         public String toString() {
             return "CustomerRequest{" +
                     "customer=" + customer +
-                    ", tableNumber=" + tableNumber +
-                    ", arrivalTime=" + arrivalTime +
+                    ", tableNumber=" + tableNumber + arrivalTime +
                     '}';
         }
     }
@@ -42,13 +41,6 @@ public class MonitorCustomer {
         lleno = 0;
         indiceInsercion = 0;
         indiceExtraccion = 0;
-    }
-
-    @Override
-    public String toString() {
-        return "ComensalesMonitor{" +
-                "buffer=" + Arrays.toString(buffer) +
-                '}';
     }
 
     public synchronized void addCustomer(Customer customer, int tableNumber) {
